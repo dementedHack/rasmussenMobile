@@ -26,7 +26,7 @@ connection.on('connect', function(err) {
         console.log(err)
     }
     else{
-        console.log("Working!")
+        alert("Working!")
     }
 });
 
