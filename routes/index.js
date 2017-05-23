@@ -7,10 +7,19 @@ var connectionString = "mongodb://mobiledb:GUd0MBA1Cf7XMWdJ6FvCsyCEOZW6W1062pg6V
 
 mongoose.connect(connectionString);
 
+var Invoice = require('../models/invoicedoc');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Kais Frustration' });
+
+  Invoice.find(function(err, invoices) {
+    if (err)
+      res.send(err);
+
+    res.json(invoices);
+  });
+
   console.log('working');
 });
 
