@@ -21,14 +21,14 @@ var config = {
 var connection = new Connection(config);
 
 // Attempt to connect and execute queries if connection goes through
-// connection.on('connect', function(err) {
-//     if (err) {
-//         console.log(err)
-//     }
-//     else{
-//         console.log("Working!")
-//     }
-// });
+connection.on('connect', function(err) {
+    if (err) {
+        console.log(err)
+    }
+    else{
+        console.log("Working!")
+    }
+});
 
 function queryDatabase(){
     console.log('Reading rows from the Table...');
