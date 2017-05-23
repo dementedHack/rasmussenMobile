@@ -10,7 +10,7 @@ mongoose.connect(connectionString);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Kais Frustration' });
   console.log('working');
 });
 
