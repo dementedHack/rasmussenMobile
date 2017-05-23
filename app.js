@@ -6,8 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 // SQL connections
-// var Connection = require('tedious').Connection;
-// var Request = require('tedious').Request;
+var Connection = require('tedious').Connection;
+var Request = require('tedious').Request;
 
 // Create connection to database
 // var config = {
