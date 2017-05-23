@@ -7,10 +7,11 @@ var connectionString = "mongodb://mobiledb:GUd0MBA1Cf7XMWdJ6FvCsyCEOZW6W1062pg6V
 
 mongoose.connect(connectionString);
 
-console.log('working');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+  console.log('working');
 });
 
 module.exports = router;
