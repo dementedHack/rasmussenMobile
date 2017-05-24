@@ -7,13 +7,14 @@ var Invoice = require('../models/invoicedoc');
 
 //Promise to avoid errors
 mongoose.Promise = require('bluebird');
+
+var dbItems = 0;
 var connectionString = "mongodb://mobiledb:GUd0MBA1Cf7XMWdJ6FvCsyCEOZW6W1062pg6V6KhLyPmhveQVhd3YMkq8s2N4BuvecnsH3KKCazGlfLGSUEyBg==@mobiledb.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
 
 
 mongoose.connect(connectionString);
 
 var db = mongoose.connection;
-var dbItems = 0;
 
 db.once('open', function() {
 	console.log('connected to DB successfully');
@@ -42,6 +43,9 @@ router.post('/', function(req, res, next){
 		if(err){
 			console.log(err);
 		}
+		console.log("Item saved to DB");
+		console.log(documentName);
+		console.log(documentType);
 	})
 });
 
