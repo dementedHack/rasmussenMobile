@@ -10,7 +10,7 @@ var connectionString = "mongodb://mobiledb:GUd0MBA1Cf7XMWdJ6FvCsyCEOZW6W1062pg6V
 mongoose.connect(connectionString);
 
 var db = mongoose.connection;
-var dbItems;
+var dbItems = 0;
 
 db.once('open', function() {
 	console.log('connected to DB successfully');
@@ -23,9 +23,7 @@ db.once('open', function() {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Kais Frustration', dbItems: dbItems });
-
-	  
+  res.render('index', { title: 'Kais Frustration', dbItems: dbItems });  
 });
 
 router.post('/', function(){
