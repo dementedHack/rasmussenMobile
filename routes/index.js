@@ -6,23 +6,17 @@ var models = {};
 var Invoice = require('../models/invoicedoc');
 
 //Promise to avoid errors
-mongoose.Promise = require('bluebird');
-
 var dbItems = 0;
 var connectionString = "mongodb://mobiledb:GUd0MBA1Cf7XMWdJ6FvCsyCEOZW6W1062pg6V6KhLyPmhveQVhd3YMkq8s2N4BuvecnsH3KKCazGlfLGSUEyBg==@mobiledb.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
-
+mongoose.Promise = require('bluebird');
 
 mongoose.connect(connectionString);
-
 var db = mongoose.connection;
 
 db.once('open', function() {
 	console.log('connected to DB successfully');
+	scanForInvoices();
 
-	Invoice.find(function (err, invoices) {
-	  if (err) return console.error(err);
-	  dbItems = (invoices);
-	})
 });
 
 /* GET home page. */
@@ -46,7 +40,16 @@ router.post('/', function(req, res, next){
 		console.log("Item saved to DB");
 		console.log(documentName);
 		console.log(documentType);
+
+		scanForInvoices();
 	})
 });
+
+function scanForInvoices() {
+	Invoice.find(function (err, invoices) {
+	  if (err) return console.error(err);
+	  dbItems = (invoices);
+	})
+}
 
 module.exports = router;
