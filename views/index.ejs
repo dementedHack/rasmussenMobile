@@ -7,5 +7,10 @@
   <body>
     <h1>The name of our site is <%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <ul>
+		<%for (var i=0; i < dbItems.length; i++) {%>
+			<li> <%= dbItems[i] %> </li>
+		<% } %>
+    </ul>
   </body>
 </html>
