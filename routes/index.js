@@ -5,7 +5,10 @@ var Schema = mongoose.Schema
 var models = {};
 var Invoice = require('../models/invoicedoc');
 
+//Promise to avoid errors
+mongoose.Promise = require('bluebird');
 var connectionString = "mongodb://mobiledb:GUd0MBA1Cf7XMWdJ6FvCsyCEOZW6W1062pg6V6KhLyPmhveQVhd3YMkq8s2N4BuvecnsH3KKCazGlfLGSUEyBg==@mobiledb.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
+
 
 mongoose.connect(connectionString);
 
@@ -26,17 +29,20 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Kais Frustration', dbItems: dbItems });  
 });
 
-router.post('/', function(){
+router.post('/', function(req, res, next){
+
+	var documentName = req.body.documentName;
+	var documentType = req.body.documentType;
 
 	var newInvoice = new Invoice;
-	newInvoice.taskName = "The task";
-	newInvoice.type = "PDF";
+	newInvoice.taskName = documentName;
+	newInvoice.type = documentType;
 
 	newInvoice.save(function(err){
 		if(err){
 			console.log(err);
 		}
 	})
-})
+});
 
 module.exports = router;

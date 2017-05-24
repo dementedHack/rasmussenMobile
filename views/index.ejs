@@ -7,9 +7,22 @@
   <body>
     <h1>The name of our site is <%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <form action="/invoice/delete" method="post"> 
+        <input type="text" id="documentName" name="documentName"></input>
+        <input type="text" id="documentType" name="documentType"></imput>
+        <input type="submit" value="enviar"></input>
+    </form>
     <ul>
-		<%for (var i=0; i < dbItems.length; i++) {%>
-			<li> <%= dbItems[i] %> </li>
+		<% for (var i = 0; i < dbItems.length; i++){ %>
+
+				
+				<li id="dbItem" name="dbItem"> 
+					<%= dbItems[i] %>
+				</li>
+					
+				<script type="text/javascript">
+					console.log(document.getElementById('dbItem').innerHTML);
+				</script>
 		<% } %>
     </ul>
   </body>
