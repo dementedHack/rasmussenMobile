@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 
 // Define our beer schema
 var InvoiceSchema   = new mongoose.Schema({
-  taskName: String,
-  type: String
+  name: String,
+  company: String
 });
 
 // Export the Mongoose model
