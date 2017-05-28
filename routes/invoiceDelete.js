@@ -12,12 +12,12 @@ mongoose.Promise = require('bluebird');
 router.post('/', function(req, res, next) {
 	Invoice.remove({_id: req.body._id}, function(err){
 		if (err) return err;
-		console.log('Request to delete item');
+		scanForInvoices();
+		setTimeout(function(){
+			res.json(invoiceItems);
+		} , 600);
 	});
-	scanForInvoices();
-	setTimeout(function(){
-		res.json(invoiceItems);
-	} ,200);
+	
 	
 });
 

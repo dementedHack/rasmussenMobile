@@ -30,14 +30,14 @@
     <h1>Upload Invoice</h1>
     <a href="#" id="addItemToDB" data-role="button" data-icon="check">Upload</a>
   </div>
-  <div data-role="content">
-  	<div data-role="fieldcontain">
-      <label for="textinput">Invoice Name:</label>
-      <input type="text" name="textinput" id="invoiceName" value=""  />
-    </div>
+  <div data-role="content">	
     <div data-role="fieldcontain">
       <label for="textinput">Company:</label>
       <input type="text" name="textinput" id="invoiceCompany" value=""  />
+    </div>
+    <div data-role="fieldcontain">
+      <label for="textinput">Invoice Name:</label>
+      <input type="text" name="textinput" id="invoiceName" value=""  />
     </div>
     <form>
      <label for="file-1">Upload Invoice:</label>
@@ -73,18 +73,36 @@
 				<h3> 
 					Invoice Name: <span id="taskName<%= i %>"><%= invoiceItems[i].name %> </span>
 				</h3>
-				<input type="submit" id="deleteItem<%= i %>Button" action="/invoice/delete" value="Remove">	
+				<input type="button" id="deleteItem<%= i %>Button" action="/invoice/delete" value="Remove">	
 				<hr>
 				<script type="text/javascript">
 					// Script will grab the element id from the item when the Remove button is pushed.
 					// When the i'th button is pushed, that item will get deleted from the database.
 					$("#deleteItem<%= i %>Button").click(function(){
+            var newInvoiceItemsDiv = "";
             $.ajax({
                 url: "/invoicedelete",
                 method: 'post',  
                 data: {_id: "<%= invoiceItems[i].id %>"},
-                success: function(data) {
-                  return data;
+                success: function(result) {
+                  setTimeout(function(){
+                      for (var i = 0; i < result.length; i++) {
+                        console.log(result[i].company);
+                          newInvoiceItemsDiv += '<h1>Company: ' + result[i].company +'</h1><h3>Invoice Name: <span id="taskName' + i +'">' + result[i].company + '</span></h3>';
+                          newInvoiceItemsDiv += '<input type="button" id="deleteItem' + i + 'Button" action="/invoice/delete" value="Remove"><hr>';
+                          $('#invoiceItems').on('click', '#deleteItem' + i + 'Button', function(){
+                              $.ajax({
+                                  url: "/invoicedelete",
+                                  method: 'post',  
+                                  data: {_id: "<%= invoiceItems[i].id %>"},
+                                  success: function(result) {
+                                      console.log(result);
+                                  }
+                                });
+                          });
+                      }
+                      $(invoiceItems).html(newInvoiceItemsDiv);
+                  }, 400);
                 }
              });
 					});
