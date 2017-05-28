@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema
 var Invoice = require('../models/invoicedoc');
 
-var invoiceItems = 0;
+var invoiceItems;
 
 mongoose.Promise = require('bluebird');
 

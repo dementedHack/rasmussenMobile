@@ -7,7 +7,7 @@ var Invoice = require('../models/invoicedoc');
 
 //Promise to avoid errors
 var invoiceItems = 0;
-var connectionString = "mongodb://mobiledb:GUd0MBA1Cf7XMWdJ6FvCsyCEOZW6W1062pg6V6KhLyPmhveQVhd3YMkq8s2N4BuvecnsH3KKCazGlfLGSUEyBg==@mobiledb.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
+var connectionString = "mongodb://mobiledb:GUd0MBA1Cf7XMWdJ6FvCsyCEOZW6W1062pg6V6KhLyPmhveQVhd3YMkq8s2N4BuvecnsH3KKCazGlfLGSUEyBg==@mobiledb.documents.azure.com:10255/?ssl=true";
 mongoose.Promise = require('bluebird');
 
 mongoose.connect(connectionString);
@@ -16,11 +16,11 @@ var db = mongoose.connection;
 db.once('open', function() {
 	console.log('connected to DB successfully');
 	scanForInvoices();
-
 });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  scanForInvoices();
   res.render('index', { title: 'Invoice Scanner', invoiceItems: invoiceItems });  
 });
 
