@@ -11,7 +11,10 @@ mongoose.Promise = require('bluebird');
 /* GET invoice listing. Will respoond with JSON */
 router.get('/', function(req, res, next){
 	scanForInvoices();
-	res.json(invoiceItems);
+	setTimeout(function(){
+		res.json(invoiceItems);
+	}, 200);
+	
 });
 
 // This function will add an invoice to the DB
